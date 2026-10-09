@@ -1,0 +1,16 @@
+{
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "${workspaceFolder}/apps/edid-emu",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/edid-emu/nucleo_l031k6/compile_commands.json",
+    "files.associations": { "*.overlay": "dts", "*.dtsi": "dts", "prj.conf": "properties" },
+    "terminal.integrated.profiles.windows": {
+        "Zephyr": {
+            "path": "pwsh.exe",
+            "args": ["-NoExit", "-File", "${workspaceFolder}/scripts/env.ps1"],
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Zephyr",
+    "files.exclude": { "build": false },
+    "search.exclude": { "zephyr": true, "modules": true, "build": true, "bootloader": true, "tools": true }
+}

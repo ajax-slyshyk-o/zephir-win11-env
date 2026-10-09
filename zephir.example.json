@@ -1,0 +1,15 @@
+{
+    "toolchain": {
+        "variant": "gnuarmemb",
+        "path": "D:\\bin\\_compilers\\_latests\\gcc-arm-none-eabi"
+    },
+    "programmer": "C:\\Program Files\\STMicroelectronics\\STM32Cube\\STM32CubeProgrammer\\bin",
+    "paths": [],
+    "env": {
+        "ZEPHIR_WIN11": "1"
+    },
+    "defaults": {
+        "app": "edid-emu",
+        "board": "nucleo_l031k6"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "options": { "shell": { "executable": "pwsh.exe", "args": ["-NoProfile", "-Command"] } },
+    "tasks": [
+        { "label": "Zephyr: build", "type": "shell", "group": { "kind": "build", "isDefault": true },
+          "command": "& ${workspaceFolder}/scripts/build.ps1", "problemMatcher": "$gcc" },
+        { "label": "Zephyr: build pristine", "type": "shell",
+          "command": "& ${workspaceFolder}/scripts/build.ps1 -Pristine", "problemMatcher": "$gcc" },
+        { "label": "Zephyr: flash", "type": "shell", "dependsOn": "Zephyr: build",
+          "command": ". ${workspaceFolder}/scripts/env.ps1; west flash -d build/edid-emu/nucleo_l031k6 --runner stm32cubeprogrammer" },
+        { "label": "Zephyr: update", "type": "shell", "command": ". ${workspaceFolder}/scripts/env.ps1; west update --narrow -o=--depth=1" }
+    ]
+}

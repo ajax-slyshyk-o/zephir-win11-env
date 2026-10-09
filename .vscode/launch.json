@@ -1,0 +1,19 @@
+{
+    // Needs extension "Cortex-Debug" and OpenOCD (winget install openocd) or ST-LINK GDB server
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug nucleo_l031k6 (OpenOCD)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/edid-emu/nucleo_l031k6/zephyr/zephyr.elf",
+            "armToolchainPath": "D:/bin/_compilers/_latests/gcc-arm-none-eabi/bin",
+            "configFiles": ["interface/stlink.cfg", "target/stm32l0.cfg"],
+            "device": "STM32L031K6",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "Zephyr: build"
+        }
+    ]
+}

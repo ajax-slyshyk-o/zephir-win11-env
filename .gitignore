@@ -1,0 +1,9 @@
+.venv/
+.west/
+build/
+zephyr/
+modules/
+bootloader/
+tools/
+apps/
+zephir.json
