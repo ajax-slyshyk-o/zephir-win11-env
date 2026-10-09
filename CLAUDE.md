@@ -27,7 +27,7 @@ Defaults for -App/-Board come from `zephir.json` -> `defaults`.
 - Run builds and west **from PowerShell** (`pwsh -NoProfile -File scripts\build.ps1` / `-Command '. .\scripts\env.ps1; west ...'`).
   **Never configure a build dir from Git Bash**: CMake caches Git's `winpty` as `PTY_INTERFACE`, and
   menuconfig then fails in pwsh with `stdin is not a tty`. Fix: `west build -d <dir> -- -UPTY_INTERFACE`.
-- `D:\Projects` is a **symlink** to `E:\Projects`; the real workspace is `E:\Projects\AJAX\zephir`.
+- `D:\Projects` is a **symlink** to `E:\Projects`; the real workspace is `E:\Projects\AJAX\zephir-win11-env`.
   CMake stores `E:` paths; west run from a `D:` cwd fails with `path is on mount 'E:', start on mount 'D:'`.
   `env.ps1` (`Get-RealPath`) resolves this and `Set-Location`s to the real path - keep that logic.
   Use `E:` paths in commands.
@@ -38,6 +38,10 @@ Defaults for -App/-Board come from `zephir.json` -> `defaults`.
   `C:\Users\user\anaconda3\python.exe` for helper scripts.
 - `menuconfig` needs an interactive terminal: not a VS Code task (removed on purpose), and not
   runnable with redirected output. To test it, start it in a new console window.
+- After moving/renaming the workspace folder: `west` fails with "uv trampoline failed to canonicalize
+  script path" (venv launchers embed absolute paths). Fix: `uv pip install --python .venv\Scripts\python.exe
+  --reinstall west -r zephyr\scripts\requirements.txt`, `west zephyr-export`, delete stale
+  `HKCU\Software\Kitware\CMake\Packages\Zephyr` entries, and delete `build\` folders (`-Pristine` can't fix them).
 - `setup.ps1` is safe to re-run (idempotent) but runs `west update`, which resets modules to manifest revisions.
   `-ZephyrRev` only applies to a fresh workspace. Don't run it without asking.
 
@@ -48,4 +52,5 @@ Defaults for -App/-Board come from `zephir.json` -> `defaults`.
 - Kconfig changes to keep belong in `apps\<app>\prj.conf` (menuconfig edits only `build\...\.config`, lost on `-Pristine`).
 - Board devicetree: `apps\<app>\boards\<board>.overlay`.
 - Editing with sed via Git Bash mangles backslashes in Windows paths; prefer exact edits.
-- The workspace root is not a git repo; `.gitignore` is prepared (ignores `apps/`, `build/`, Zephyr trees, `.venv/`).
+- The workspace root is a git repo (branch `main`); `.gitignore` excludes `apps/`, `build/`, Zephyr trees,
+  `.venv/`, `zephir.json`.
