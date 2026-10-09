@@ -1,5 +1,5 @@
 # One-time setup: venv + west + Zephyr sources + python deps (+ host tools)
-param([string]$ZephyrRev = 'v4.2.0')   # use 'main' for latest
+param([string]$ZephyrRev = 'v4.4.0')   # use 'main' for latest
 $ErrorActionPreference = 'Stop'
 # Machine settings (git-ignored): create from the template on first run, then edit paths
 if (-not (Test-Path "$PSScriptRoot\..\zephir.json")) {
